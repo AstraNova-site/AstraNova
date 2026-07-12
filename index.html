@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+	<meta name="description" content="ASTRANOVA official esports team. Defining the future of competitive gaming." />
+	<meta property="og:title" content="ASTRANOVA | ESPORTS TEAM" />
+	<meta property="og:description" content="Defining the future of competitive gaming." />
+	<meta property="og:type" content="website" />
+	<meta property="og:image" content="https://astranova.com/ogp.jpg" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<title>ASTRANOVA</title>
+	
+	<!-- Fonts -->
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Michroma&family=JetBrains+Mono:wght@400;700&family=Syncopate:wght@700&display=swap" rel="stylesheet">
+	
+	<link rel="stylesheet" href="style.css" />
+	<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+</head>
+<body>
+	<!-- Interactive WebGL Background -->
+	<div id="webgl-container"></div>
+	<div id="grain-overlay"></div>
+
+	<!-- Header -->
+	<header class="site-header">
+		<a href="#hero" class="brand-logo" aria-label="ASTRANOVA Home">
+			ASTRANOVA
+		</a>
+		<button id="hamburger-menu" class="hamburger" aria-label="Open Menu" aria-expanded="false">
+			<span></span>
+			<span></span>
+			<span></span>
+		</button>
+	</header>
+
+	<!-- Mobile & Desktop Overlay Navigation -->
+	<nav id="nav-overlay" class="nav-overlay" aria-hidden="true">
+		<div class="nav-container">
+			<button id="close-menu" class="close-menu" aria-label="Close Menu">
+				<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+			</button>
+			
+			<div class="nav-content">
+				<ul class="nav-links">
+					<li><a href="#hero" class="nav-link" data-i18n="navTop">TOP</a></li>
+					<li><a href="#about" class="nav-link" data-i18n="navDoctrine">Philosophy</a></li>
+					<li><a href="#members" class="nav-link" data-i18n="navMembers">Team Members</a></li>
+					<li><a href="#achievements" class="nav-link" data-i18n="navAchievements">Competition Results</a></li>
+					<li><a href="#sponsors" class="nav-link" data-i18n="navPartners">Sponsor</a></li>
+					<li><a href="#contact" class="nav-link" data-i18n="navApply">Contact Us</a></li>
+				</ul>
+				
+				<div class="nav-controls">
+					<button id="theme-toggle" class="control-btn" aria-label="Toggle Theme">
+						<svg class="icon-dark" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+						<svg class="icon-light" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+						<span id="theme-label">DARK</span>
+					</button>
+					<button id="lang-toggle" class="control-btn" aria-label="Toggle Language">
+						<span class="icon">EN</span> <span id="lang-label">/ JP</span>
+					</button>
+				</div>
+			</div>
+		</div>
+	</nav>
+
+	<main>
+		<!-- HERO -->
+		<section id="hero" class="hero-section">
+			<div class="hero-content-original">
+				<h1 class="hero-title-original" id="wordmark">ASTRANOVA</h1>
+				<p class="hero-subtitle-original" data-i18n="heroSubtitle">EST. 2026 / Nagasaki</p>
+		</section>
+
+		<!-- ABOUT / DOCTRINE -->
+		<section id="about" class="section-container original-about">
+			<div class="section-header center">
+				<span class="section-eyebrow" data-i18n="navDoctrine">Philosophy</span>
+				<h2 class="section-title">Philosophy</h2>
+			</div>
+			
+			<div class="about-inner">
+				<div class="about-orbit"></div>
+				
+				<div class="about-content">
+					<p class="about-lead" data-i18n="aboutLead">
+						ASTRANOVA は、長崎のチームである。テストコード<strong>勝敗は通過点</strong>に過ぎない。私たちが集めているのは、まだ誰も辿り着いていない景色そのものだ。
+					</p>
+					<ul class="about-log" id="about-log">
+						<li style="--li: 1" data-i18n="aboutLog1">LOG_001 / 設立 ―― 2026年、長崎を起点に始動。</li>
+						<li style="--li: 2" data-i18n="aboutLog2">LOG_002 / 目標 ―― テストコード</li>
+						<li style="--li: 3" data-i18n="aboutLog3">LOG_003 / 現在 ―― テストコード</li>
+					</ul>
+				</div>
+				
+				<div class="about-telemetry">
+					<div class="about-telemetry-head">
+						<span>SYSTEM STATUS</span>
+						<div class="pulse-dot"></div>
+					</div>
+					<div class="about-stat-row">
+						<span class="about-stat-label">UNITS</span>
+						<span class="about-stat-value">05</span>
+					</div>
+					<div class="about-stat-row">
+						<span class="about-stat-label">BASE</span>
+						<span class="about-stat-value">Nagasaki</span>
+					</div>
+					<div class="about-stat-row">
+						<span class="about-stat-label">SYNC RATE</span>
+						<span class="about-stat-value">98.4%</span>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- MEMBERS -->
+		<section id="members" class="section-container">
+			<div class="section-header">
+				<h2 class="section-title glitch" data-text="Team Members" data-i18n="secMembers">Team Members</h2>
+			</div>
+
+			<div class="slider-container" id="members-slider">
+				<div class="slider-track" id="slider-track">
+					<!-- Member 1 -->
+					<article class="member-card">
+						<div class="member-img" style="background-image: url('');"></div>
+						<div class="member-info">
+							<span class="member-role">NAVIGATOR</span>
+							<h3 class="member-name">ARIA</h3>
+							<div class="member-socials">
+								<a href="#" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+							</div>
+						</div>
+					</article>
+					<!-- Member 2 -->
+					<article class="member-card">
+						<div class="member-img" style="background-image: url('');"></div>
+						<div class="member-info">
+							<span class="member-role">ENGINEER</span>
+							<h3 class="member-name">KAITO</h3>
+							<div class="member-socials">
+								<a href="#" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+							</div>
+						</div>
+					</article>
+					<!-- Member 3 -->
+					<article class="member-card">
+						<div class="member-img" style="background-image: url('');"></div>
+						<div class="member-info">
+							<span class="member-role">PILOT</span>
+							<h3 class="member-name">REN</h3>
+							<div class="member-socials">
+								<a href="#" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+							</div>
+						</div>
+					</article>
+					<!-- Member 4 -->
+					<article class="member-card">
+						<div class="member-img" style="background-image: url('');"></div>
+						<div class="member-info">
+							<span class="member-role">COMMS</span>
+							<h3 class="member-name">LUNA</h3>
+							<div class="member-socials">
+								<a href="#" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+							</div>
+						</div>
+					</article>
+					<!-- Member 5 -->
+					<article class="member-card">
+						<div class="member-img" style="background-image: url('');"></div>
+						<div class="member-info">
+							<span class="member-role">ANALYST</span>
+							<h3 class="member-name">YUKI</h3>
+							<div class="member-socials">
+								<a href="#" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+							</div>
+						</div>
+					</article>
+					<!-- Member 6 -->
+					<article class="member-card">
+						<div class="member-img" style="background-image: url('');"></div>
+						<div class="member-info">
+							<span class="member-role">SCOUT</span>
+							<h3 class="member-name">SORA</h3>
+							<div class="member-socials">
+								<a href="#" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+							</div>
+						</div>
+					</article>
+					<!-- Member 7 -->
+					<article class="member-card">
+						<div class="member-img" style="background-image: url('');"></div>
+						<div class="member-info">
+							<span class="member-role">TACTICIAN</span>
+							<h3 class="member-name">LEO</h3>
+							<div class="member-socials">
+								<a href="#" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+							</div>
+						</div>
+					</article>
+					<!-- Member 8 -->
+					<article class="member-card">
+						<div class="member-img" style="background-image: url('');"></div>
+						<div class="member-info">
+							<span class="member-role">SUPPORT</span>
+							<h3 class="member-name">MIO</h3>
+							<div class="member-socials">
+								<a href="#" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+							</div>
+						</div>
+					</article>
+					<!-- Member 9 -->
+					<article class="member-card">
+						<div class="member-img" style="background-image: url('');"></div>
+						<div class="member-info">
+							<span class="member-role">SUPPORT</span>
+							<h3 class="member-name">9</h3>
+							<div class="member-socials">
+								<a href="#" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+							</div>
+						</div>
+					</article>
+					<!-- Member 10 -->
+					<article class="member-card">
+						<div class="member-img" style="background-image: url('');"></div>
+						<div class="member-info">
+							<span class="member-role">SUPPORT</span>
+							<h3 class="member-name">10</h3>
+							<div class="member-socials">
+								<a href="#" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+							</div>
+						</div>
+					</article>
+					<!-- Member 11 -->
+					<article class="member-card">
+						<div class="member-img" style="background-image: url('');"></div>
+						<div class="member-info">
+							<span class="member-role">SUPPORT</span>
+							<h3 class="member-name">11</h3>
+							<div class="member-socials">
+								<a href="#" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+							</div>
+						</div>
+					</article>
+					<!-- Member 12 -->
+					<article class="member-card">
+						<div class="member-img" style="background-image: url('');"></div>
+						<div class="member-info">
+							<span class="member-role">SUPPORT</span>
+							<h3 class="member-name">12</h3>
+							<div class="member-socials">
+								<a href="#" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+							</div>
+						</div>
+					</article>
+				</div>
+
+				<!-- Navigation Buttons -->
+				<button class="slider-btn prev" id="slider-prev" aria-label="Previous">
+					<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+				</button>
+				<button class="slider-btn next" id="slider-next" aria-label="Next">
+					<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+				</button>
+			</div>
+		</section>
+
+		<!-- ACHIEVEMENTS -->
+		<section id="achievements" class="section-container">
+			<div class="section-header">
+				<h2 class="section-title glitch" data-text="Competition Results" data-i18n="secAchievements">Competition Results</h2>
+			</div>
+			
+			<div class="bento-grid achievements-bento">
+				<div class="bento-card blank-card">
+					<div class="placeholder-content">
+						<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 15l-3 3h6l-3-3zM5 10v4M19 10v4M12 3L5 10M12 3l7 7"/></svg>
+						<span data-i18n="awaitingData">AWAITING RECORD...</span>
+					</div>
+				</div>
+				<div class="bento-card blank-card">
+					<div class="placeholder-content">
+						<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 15l-3 3h6l-3-3zM5 10v4M19 10v4M12 3L5 10M12 3l7 7"/></svg>
+						<span data-i18n="awaitingData">AWAITING RECORD...</span>
+					</div>
+				</div>
+				<div class="bento-card blank-card">
+					<div class="placeholder-content">
+						<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 15l-3 3h6l-3-3zM5 10v4M19 10v4M12 3L5 10M12 3l7 7"/></svg>
+						<span data-i18n="awaitingData">AWAITING RECORD...</span>
+					</div>
+				</div>
+				<div class="bento-card blank-card">
+					<div class="placeholder-content">
+						<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 15l-3 3h6l-3-3zM5 10v4M19 10v4M12 3L5 10M12 3l7 7"/></svg>
+						<span data-i18n="awaitingData">AWAITING RECORD...</span>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- SPONSORS -->
+		<section id="sponsors" class="section-container">
+			<div class="section-header">
+				<h2 class="section-title glitch" data-text="Sponsor" data-i18n="secPartners">Sponsor</h2>
+			</div>
+			
+			<div class="partners-grid">
+				<div class="partner-card"><span class="partner-placeholder">SLOT 01</span></div>
+				<div class="partner-card"><span class="partner-placeholder">SLOT 02</span></div>
+				<div class="partner-card"><span class="partner-placeholder">SLOT 03</span></div>
+				<div class="partner-card"><span class="partner-placeholder">SLOT 04</span></div>
+			</div>
+		</section>
+
+		<!-- APPLY / CONTACT -->
+		<section id="contact" class="section-container">
+			<div class="section-header">
+				<h2 class="section-title glitch" data-text="Contact Us" data-i18n="secApply">Contact Us</h2>
+			</div>
+			
+			<div class="contact-card">
+				<!-- Formspree endpoint required here -->
+				<form id="contactForm" action="https://formspree.io/f/mlgvkqro" method="POST" class="modern-form">
+					
+					<div class="form-group">
+						<label for="apply-type" class="form-label" data-i18n="formType">CATEGORY</label>
+						<div class="select-wrapper">
+							<select id="apply-type" name="apply-type" class="form-control" required>
+								<option value="" disabled selected data-i18n="formSelect">Please select</option>
+								<option value="player" data-i18n="formOptPlayer">Player</option>
+								<option value="manager" data-i18n="formOptManager">Manager</option>
+								<option value="designer" data-i18n="formOptDesigner">Designer</option>
+								<option value="other" data-i18n="formOptOther">Other Inquiries</option>
+							</select>
+						</div>
+					</div>
+					
+					<div class="form-row">
+						<div class="form-group half">
+							<label for="name" class="form-label" data-i18n="formName">NAME</label>
+							<input type="text" id="name" name="name" class="form-control" autocomplete="name" required />
+						</div>
+						<div class="form-group half">
+							<label for="email" class="form-label" data-i18n="formEmail">EMAIL</label>
+							<input type="email" id="email" name="email" class="form-control" autocomplete="email" required />
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label for="portfolio" class="form-label" data-i18n="formPortfolio">PORTFOLIO URL (OPTIONAL)</label>
+						<input type="url" id="portfolio" name="portfolio" class="form-control" autocomplete="url" placeholder="https://" />
+					</div>
+
+					<div class="form-group">
+						<label for="message" class="form-label" data-i18n="formMessage">MESSAGE</label>
+						<textarea id="message" name="message" class="form-control" rows="5" required></textarea>
+					</div>
+
+					<!-- Cloudflare Turnstile -->
+					<div class="turnstile-container">
+						<!-- Sitekey must be updated for production -->
+						<div class="cf-turnstile" data-sitekey="1x00000000000000000000AA" data-theme="auto"></div>
+					</div>
+
+					<button type="submit" class="submit-btn" data-i18n="formSubmit">SEND APPLICATION</button>
+				</form>
+			</div>
+		</section>
+	</main>
+
+	<footer class="site-footer">
+		<div class="footer-inner">
+			<div class="footer-logo">ASTRANOVA</div>
+			<div class="footer-copy">© 2024 ASTRANOVA ESPORTS. ALL RIGHTS RESERVED.</div>
+		</div>
+	</footer>
+
+	<!-- Success Modal -->
+	<div id="success-modal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+		<div class="modal-card">
+			<div class="modal-icon">
+				<svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+					<polyline points="20 6 9 17 4 12"></polyline>
+				</svg>
+			</div>
+			<h3 class="modal-title" id="modal-title">TRANSMISSION COMPLETE</h3>
+			<p class="modal-message">お問い合わせを受け付けました。<br>内容を確認の上、ご連絡いたします。</p>
+			<button class="modal-close-btn" id="modal-close">CLOSE</button>
+		</div>
+	</div>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" integrity="sha512-dLxUelApnYxpLt6K2iomGngnHO83iUvZytA3YjDUCjT0HDOHKXnVYdf3hU4JjM8uEhxf9nD1/ey98U3t2vZ0qQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<script src="main.js"></script>
+</body>
+</html>
