@@ -69,6 +69,7 @@ document.addEventListener("DOMContentLoaded", () => {
       formOptPlayer: "プレイヤー募集 (PLAYER)",
       formOptManager: "マネージャー募集 (MANAGER)",
       formOptDesigner: "デザイナー募集 (DESIGNER)",
+      formOptStreamer: "ストリーマー募集 (STREAMER)",
       formOptOther: "その他お問い合わせ (OTHER)",
       formName: "NAME",
       formEmail: "EMAIL",
@@ -100,6 +101,7 @@ document.addEventListener("DOMContentLoaded", () => {
       formOptPlayer: "PLAYER",
       formOptManager: "MANAGER",
       formOptDesigner: "DESIGNER",
+      formOptStreamer: "STREAMER",
       formOptOther: "OTHER",
       formName: "NAME",
       formEmail: "EMAIL",
@@ -343,6 +345,8 @@ document.addEventListener("DOMContentLoaded", () => {
         "【マネージャー/スタッフ応募】\n・希望する業務内容：\n・関連する経験やスキル：\n・週に稼働できる時間：",
       designer:
         "【デザイナー応募】\n・ポートフォリオURL：\n・使用可能なツール（Illustrator, Photoshopなど）：\n・得意なデザイン分野：",
+      streamer:
+        "【ストリーマー応募】\n・配信活動を行っているプラットフォーム（Twitch/YouTube等）：\n・現在のチャンネル登録者数/フォロワー数：\n・主な配信ゲームカテゴリ：",
       other: "【お問い合わせ内容】\n（こちらにご用件をご記入ください）",
     };
 
@@ -373,7 +377,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const emailVal = document.getElementById("email")?.value?.trim();
       const messageVal = document.getElementById("message")?.value?.trim();
 
-      const validTypes = ["player", "manager", "designer", "other"];
+      const validTypes = ["player", "manager", "designer", "streamer", "other"];
 
       if (
         !typeVal ||
