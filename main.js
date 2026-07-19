@@ -150,177 +150,182 @@ document.addEventListener("DOMContentLoaded", () => {
     "(prefers-reduced-motion: reduce)",
   ).matches;
 
+  // WebGL / Three.js の初期化処理（エラー保護付き）
   if (
     typeof THREE !== "undefined" &&
     document.getElementById("webgl-container")
   ) {
-    const scene = new THREE.Scene();
-    scene.fog = new THREE.FogExp2(0x02040a, 0.04);
+    try {
+      const scene = new THREE.Scene();
+      scene.fog = new THREE.FogExp2(0x02040a, 0.04);
 
-    const initWidth = window.innerWidth || 1024;
-    const initHeight = window.innerHeight || 768;
+      const initWidth = window.innerWidth || 1024;
+      const initHeight = window.innerHeight || 768;
 
-    const camera = new THREE.PerspectiveCamera(
-      120,
-      initWidth / initHeight,
-      0.1,
-      1000,
-    );
-    camera.position.set(0, 0, -30);
-    camera.rotation.z = Math.PI;
+      const camera = new THREE.PerspectiveCamera(
+        120,
+        initWidth / initHeight,
+        0.1,
+        1000,
+      );
+      camera.position.set(0, 0, -30);
+      camera.rotation.z = Math.PI;
 
-    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-    renderer.setSize(initWidth, initHeight);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-    document.getElementById("webgl-container").appendChild(renderer.domElement);
+      const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+      renderer.setSize(initWidth, initHeight);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      document.getElementById("webgl-container").appendChild(renderer.domElement);
 
-    const particlesCount = 12000;
-    const geometry = new THREE.BufferGeometry();
-    const posArray = new Float32Array(particlesCount * 3);
+      const particlesCount = 12000;
+      const geometry = new THREE.BufferGeometry();
+      const posArray = new Float32Array(particlesCount * 3);
 
-    for (let i = 0; i < particlesCount; i++) {
-      const r = Math.random() * 12;
-      const theta = Math.random() * Math.PI * 2;
-      const ySpread =
-        Math.pow(Math.random(), 2) *
-        (Math.random() < 0.5 ? 1 : -1) *
-        (10 / (r + 1.5));
+      for (let i = 0; i < particlesCount; i++) {
+        const r = Math.random() * 12;
+        const theta = Math.random() * Math.PI * 2;
+        const ySpread =
+          Math.pow(Math.random(), 2) *
+          (Math.random() < 0.5 ? 1 : -1) *
+          (10 / (r + 1.5));
 
-      posArray[i * 3] = r * Math.cos(theta);
-      posArray[i * 3 + 1] = ySpread;
-      posArray[i * 3 + 2] = r * Math.sin(theta);
-    }
-
-    geometry.setAttribute("position", new THREE.BufferAttribute(posArray, 3));
-
-    particleMaterial = new THREE.PointsMaterial({
-      size: 0.015,
-      color:
-        htmlEl.getAttribute("data-theme") === "dark" ? colorDark : colorLight,
-      transparent: true,
-      blending: THREE.AdditiveBlending,
-    });
-
-    const particlesMesh = new THREE.Points(geometry, particleMaterial);
-    particlesMesh.rotation.x = Math.PI * 0.15;
-    scene.add(particlesMesh);
-
-    let mouseX = 0,
-      mouseY = 0;
-    let targetZ = 12;
-    let targetFov = 75;
-    let targetRotZ = 0;
-
-    function updateMouse(x, y) {
-      const w = window.innerWidth || 1024;
-      const h = window.innerHeight || 768;
-      mouseX = x / w - 0.5;
-      mouseY = y / h - 0.5;
-    }
-
-    document.addEventListener("mousemove", (e) =>
-      updateMouse(e.clientX, e.clientY),
-    );
-    document.addEventListener(
-      "touchmove",
-      (e) => {
-        if (e.touches && e.touches.length > 0) {
-          updateMouse(e.touches[0].clientX, e.touches[0].clientY);
-        }
-      },
-      { passive: true },
-    );
-
-    function animate() {
-      if (reduceMotion) return;
-      requestAnimationFrame(animate);
-
-      particlesMesh.rotation.y += 0.0008;
-
-      camera.position.z += (targetZ - camera.position.z) * 0.02;
-      camera.rotation.z += (targetRotZ - camera.rotation.z) * 0.02;
-      camera.fov += (targetFov - camera.fov) * 0.02;
-      camera.updateProjectionMatrix();
-
-      camera.position.x += (mouseX * 3 - camera.position.x) * 0.05;
-      camera.position.y += (-mouseY * 3 - camera.position.y) * 0.05;
-
-      camera.lookAt(0, 0, 0);
-
-      renderer.render(scene, camera);
-    }
-
-    if (!reduceMotion) {
-      animate();
-    } else {
-      camera.position.z = targetZ;
-      camera.fov = targetFov;
-      camera.updateProjectionMatrix();
-      renderer.render(scene, camera);
-    }
-
-    window.addEventListener("resize", () => {
-      const w = window.innerWidth || 1024;
-      const h = window.innerHeight || 768;
-      camera.aspect = w / h;
-      camera.updateProjectionMatrix();
-      renderer.setSize(w, h);
-    });
-
-    // Doctrine Scroll Animation hook
-    const aboutSection = document.getElementById("about");
-    if (aboutSection && !reduceMotion) {
-      let ticking = false;
-      function updateAboutParallax() {
-        const rect = aboutSection.getBoundingClientRect();
-        const vh = window.innerHeight || 800;
-        const progress = Math.min(
-          Math.max(
-            1 - (rect.top + rect.height * 0.5) / (vh + rect.height * 0.5),
-            0,
-          ),
-          1,
-        );
-        aboutSection.style.setProperty("--about-parallax", progress.toFixed(3));
-        ticking = false;
+        posArray[i * 3] = r * Math.cos(theta);
+        posArray[i * 3 + 1] = ySpread;
+        posArray[i * 3 + 2] = r * Math.sin(theta);
       }
-      window.addEventListener(
-        "scroll",
-        () => {
-          if (!ticking) {
-            requestAnimationFrame(updateAboutParallax);
-            ticking = true;
+
+      geometry.setAttribute("position", new THREE.BufferAttribute(posArray, 3));
+
+      particleMaterial = new THREE.PointsMaterial({
+        size: 0.015,
+        color:
+          htmlEl.getAttribute("data-theme") === "dark" ? colorDark : colorLight,
+        transparent: true,
+        blending: THREE.AdditiveBlending,
+      });
+
+      const particlesMesh = new THREE.Points(geometry, particleMaterial);
+      particlesMesh.rotation.x = Math.PI * 0.15;
+      scene.add(particlesMesh);
+
+      let mouseX = 0,
+        mouseY = 0;
+      let targetZ = 12;
+      let targetFov = 75;
+      let targetRotZ = 0;
+
+      function updateMouse(x, y) {
+        const w = window.innerWidth || 1024;
+        const h = window.innerHeight || 768;
+        mouseX = x / w - 0.5;
+        mouseY = y / h - 0.5;
+      }
+
+      document.addEventListener("mousemove", (e) =>
+        updateMouse(e.clientX, e.clientY),
+      );
+      document.addEventListener(
+        "touchmove",
+        (e) => {
+          if (e.touches && e.touches.length > 0) {
+            updateMouse(e.touches[0].clientX, e.touches[0].clientY);
           }
         },
         { passive: true },
       );
-      updateAboutParallax();
-    }
 
-    // Doctrine Intersection Observer
-    if ("IntersectionObserver" in window && !reduceMotion) {
-      const doctrineObserver = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              const log = document.getElementById("about-log");
-              const telemetry = document.querySelector(".about-telemetry");
-              if (log) log.classList.add("is-decoded");
-              if (telemetry) telemetry.classList.add("is-visible");
-              doctrineObserver.unobserve(entry.target);
-            }
-          });
-        },
-        { threshold: 0.1, rootMargin: "0px 0px -100px 0px" },
+      function animate() {
+        if (reduceMotion) return;
+        requestAnimationFrame(animate);
+
+        particlesMesh.rotation.y += 0.0008;
+
+        camera.position.z += (targetZ - camera.position.z) * 0.02;
+        camera.rotation.z += (targetRotZ - camera.rotation.z) * 0.02;
+        camera.fov += (targetFov - camera.fov) * 0.02;
+        camera.updateProjectionMatrix();
+
+        camera.position.x += (mouseX * 3 - camera.position.x) * 0.05;
+        camera.position.y += (-mouseY * 3 - camera.position.y) * 0.05;
+
+        camera.lookAt(0, 0, 0);
+
+        renderer.render(scene, camera);
+      }
+
+      if (!reduceMotion) {
+        animate();
+      } else {
+        camera.position.z = targetZ;
+        camera.fov = targetFov;
+        camera.updateProjectionMatrix();
+        renderer.render(scene, camera);
+      }
+
+      window.addEventListener("resize", () => {
+        const w = window.innerWidth || 1024;
+        const h = window.innerHeight || 768;
+        camera.aspect = w / h;
+        camera.updateProjectionMatrix();
+        renderer.setSize(w, h);
+      });
+    } catch (e) {
+      console.warn("WebGL background initialization failed:", e);
+    }
+  }
+
+  // Doctrine Scroll Animation hook
+  const aboutSection = document.getElementById("about");
+  if (aboutSection && !reduceMotion) {
+    let ticking = false;
+    function updateAboutParallax() {
+      const rect = aboutSection.getBoundingClientRect();
+      const vh = window.innerHeight || 800;
+      const progress = Math.min(
+        Math.max(
+          1 - (rect.top + rect.height * 0.5) / (vh + rect.height * 0.5),
+          0,
+        ),
+        1,
       );
-
-      if (aboutSection) doctrineObserver.observe(aboutSection);
-    } else {
-      const log = document.getElementById("about-log");
-      const telemetry = document.querySelector(".about-telemetry");
-      if (log) log.classList.add("is-decoded");
-      if (telemetry) telemetry.classList.add("is-visible");
+      aboutSection.style.setProperty("--about-parallax", progress.toFixed(3));
+      ticking = false;
     }
+    window.addEventListener(
+      "scroll",
+      () => {
+        if (!ticking) {
+          requestAnimationFrame(updateAboutParallax);
+          ticking = true;
+        }
+      },
+      { passive: true },
+    );
+    updateAboutParallax();
+  }
+
+  // Doctrine Intersection Observer
+  if ("IntersectionObserver" in window && !reduceMotion) {
+    const doctrineObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const log = document.getElementById("about-log");
+            const telemetry = document.querySelector(".about-telemetry");
+            if (log) log.classList.add("is-decoded");
+            if (telemetry) telemetry.classList.add("is-visible");
+            doctrineObserver.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.1, rootMargin: "0px 0px -100px 0px" },
+    );
+
+    if (aboutSection) doctrineObserver.observe(aboutSection);
+  } else {
+    const log = document.getElementById("about-log");
+    const telemetry = document.querySelector(".about-telemetry");
+    if (log) log.classList.add("is-decoded");
+    if (telemetry) telemetry.classList.add("is-visible");
   }
 
   // =========================================
